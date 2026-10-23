@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pituba Serviços Educacionais</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Notification Modal (Custom Alert) -->
+    <div id="custom-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="text-center">
+                <div id="modal-icon" class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4 text-xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-2">Sucesso!</h3>
+                <p id="modal-message" class="text-sm text-slate-600 mb-6">Mensagem enviada com sucesso.</p>
+                <button onclick="closeModal()" class="w-full py-2.5 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition shadow-lg shadow-green-600/25">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-green-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-green-600/30 group-hover:scale-105 transition">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight text-slate-900 block leading-tight">Pituba</span>
+                    <span class="text-xs font-semibold text-green-600 tracking-wider uppercase">Serviços Educacionais</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#inicio" class="hover:text-green-600 transition">Início</a>
+                <a href="#livros" class="hover:text-green-600 transition">Livros Educacionais</a>
+                <a href="#cursos" class="hover:text-green-600 transition">Cursos</a>
+                <a href="#afiliados" class="hover:text-green-600 transition">Seja Afiliado</a>
+                <a href="#sobre" class="hover:text-green-600 transition">Sobre Nós</a>
+                <a href="#contato" class="hover:text-green-600 transition">Contato</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:block">
+                <a href="#cursos" class="px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-xl shadow-lg shadow-green-600/20 transition transform hover:-translate-y-0.5">
+                    Ver Catálogo
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 text-slate-600 hover:text-slate-900 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium hover:text-green-600">Início</a>
+            <a href="#livros" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium hover:text-green-600">Livros Educacionais</a>
+            <a href="#cursos" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium hover:text-green-600">Cursos</a>
+            <a href="#afiliados" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium hover:text-green-600">Seja Afiliado</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium hover:text-green-600">Sobre Nós</a>
+            <a href="#contato" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-medium hover:text-green-600">Contato</a>
+            <div class="pt-2">
+                <a href="#cursos" onclick="toggleMobileMenu()" class="block text-center w-full py-2.5 bg-green-600 text-white font-medium rounded-xl shadow-md">Ver Catálogo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section id="inicio" class="relative overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32 bg-gradient-to-b from-green-50/50 via-white to-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 text-center lg:text-left">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-green-100 text-green-700 text-xs font-bold tracking-wide uppercase mb-6">
+                            <i class="fa-solid fa-sparkles"></i> Transformando vidas através da educação
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                            Excelência em <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Livros e Cursos</span> Educacionais
+                        </h1>
+                        <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0">
+                            Na <strong class="text-slate-800">Pituba Serviços Educacionais</strong>, oferecemos materiais didáticos de ponta e formações profissionais qualificadas para impulsionar o seu futuro acadêmico e profissional.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="#cursos" class="w-full sm:w-auto px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl shadow-xl shadow-green-600/30 transition flex items-center justify-center gap-3">
+                                <i class="fa-solid fa-book-open"></i> Explorar Cursos & Livros
+                            </a>
+                            <a href="#contato" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-100 text-slate-700 font-semibold border border-slate-200 rounded-xl transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-headset"></i> Fale Conosco
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Hero Graphic/Image -->
+                    <div class="lg:col-span-5">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-green-600 to-emerald-400 opacity-30 blur-xl"></div>
+                            <div class="relative bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-2xl">
+                                <div class="space-y-6">
+                                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                        <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center text-xl flex-shrink-0">
+                                            <i class="fa-solid fa-book"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-900 text-sm">Biblioteca Atualizada</h4>
+                                            <p class="text-xs text-slate-500">Livros didáticos e paradidáticos certificados.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl flex-shrink-0">
+                                            <i class="fa-solid fa-video"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-900 text-sm">Cursos EAD & Presenciais</h4>
+                                            <p class="text-xs text-slate-500">Metodologia prática com certificação válida.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                                        <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-xl flex-shrink-0">
+                                            <i class="fa-solid fa-award"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-slate-900 text-sm">Suporte Pedagógico</h4>
+                                            <p class="text-xs text-slate-500">Equipe especializada pronta para auxiliar.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Livros Educacionais Section -->
+        <section id="livros" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-green-600 font-bold text-xs uppercase tracking-widest block mb-2">Literatura & Didáticos</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Nossos Livros Educacionais</h2>
+                    <p class="text-slate-600 mt-3 text-base">Obras desenvolvidas por especialistas para enriquecer o processo de aprendizagem em todos os níveis de ensino.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Livro 1 -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 overflow-hidden hover:shadow-xl transition flex flex-col justify-between group">
+                        <div class="p-6">
+                            <div class="h-48 rounded-xl bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center text-white mb-6 relative overflow-hidden group-hover:scale-[1.02] transition duration-300">
+                                <i class="fa-solid fa-book-bookmark text-6xl opacity-90"></i>
+                                <span class="absolute top-3 right-3 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-semibold text-white">Bestseller</span>
+                            </div>
+                            <span class="text-xs font-bold text-green-600 uppercase tracking-wider">Ensino Fundamental & Médio</span>
+                            <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">Matemática Aplicada ao Cotidiano</h3>
+                            <p class="text-sm text-slate-600">Uma abordagem prática e dinâmica para o ensino da matemática moderna, com exercícios resolvidos.</p>
+                        </div>
+                        <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-200/60 mt-4 pt-4">
+                            <span class="text-lg font-extrabold text-slate-900">R$ 89,90</span>
+                            <button onclick="openBookModal('Matemática Aplicada ao Cotidiano', '89,90')" class="px-4 py-2 bg-slate-900 hover:bg-green-600 text-white text-sm font-medium rounded-xl transition">
+                                Adquirir Livro
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Livro 2 -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 overflow-hidden hover:shadow-xl transition flex flex-col justify-between group">
+                        <div class="p-6">
+                            <div class="h-48 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-800 flex items-center justify-center text-white mb-6 relative overflow-hidden group-hover:scale-[1.02] transition duration-300">
+                                <i class="fa-solid fa-globe text-6xl opacity-90"></i>
+                                <span class="absolute top-3 right-3 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-semibold text-white">Lançamento</span>
+                            </div>
+                            <span class="text-xs font-bold text-green-600 uppercase tracking-wider">Ciências Humanas</span>
+                            <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">História e Sociedade Contemporânea</h3>
+                            <p class="text-sm text-slate-600">Compreenda os principais marcos históricos do século XXI e suas conexões com a geopolítica global atual.</p>
+                        </div>
+                        <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-200/60 mt-4 pt-4">
+                            <span class="text-lg font-extrabold text-slate-900">R$ 79,90</span>
+                            <button onclick="openBookModal('História e Sociedade Contemporânea', '79,90')" class="px-4 py-2 bg-slate-900 hover:bg-green-600 text-white text-sm font-medium rounded-xl transition">
+                                Adquirir Livro
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Livro 3 -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 overflow-hidden hover:shadow-xl transition flex flex-col justify-between group">
+                        <div class="p-6">
+                            <div class="h-48 rounded-xl bg-gradient-to-br from-teal-600 to-cyan-800 flex items-center justify-center text-white mb-6 relative overflow-hidden group-hover:scale-[1.02] transition duration-300">
+                                <i class="fa-solid fa-flask text-6xl opacity-90"></i>
+                                <span class="absolute top-3 right-3 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-semibold text-white">Popular</span>
+                            </div>
+                            <span class="text-xs font-bold text-green-600 uppercase tracking-wider">Ciências da Natureza</span>
+                            <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">Fundamentos de Biologia e Ecologia</h3>
+                            <p class="text-sm text-slate-600">Explore os ecossistemas, a biodiversidade e os conceitos essenciais da genética e ecologia moderna.</p>
+                        </div>
+                        <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-200/60 mt-4 pt-4">
+                            <span class="text-lg font-extrabold text-slate-900">R$ 94,50</span>
+                            <button onclick="openBookModal('Fundamentos de Biologia e Ecologia', '94,50')" class="px-4 py-2 bg-slate-900 hover:bg-green-600 text-white text-sm font-medium rounded-xl transition">
+                                Adquirir Livro
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cursos Educacionais Section -->
+        <section id="cursos" class="py-20 bg-slate-100/60 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-green-600 font-bold text-xs uppercase tracking-widest block mb-2">Capacitação Profissional</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Nossos Cursos Educacionais</h2>
+                    <p class="text-slate-600 mt-3 text-base">Cursos estruturados para capacitação rápida e eficiente, ministrados por professores com ampla experiência de mercado.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Curso 1 -->
+                    <div class="bg-white rounded-2xl border border-slate-200/80 overflow-hidden hover:shadow-xl transition flex flex-col justify-between group">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase">Online & Ao Vivo</span>
+                                <span class="text-xs text-slate-500 font-medium"><i class="fa-regular fa-clock mr-1"></i> 40 Horas</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Metodologias Ativas de Ensino</h3>
+                            <p class="text-sm text-slate-600 mb-4">Capacite-se nas novas tecnologias e abordagens pedagógicas voltadas para a sala de aula do futuro.</p>
+                            <ul class="space-y-2 text-xs text-slate-600 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Certificado Incluso</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Material de apoio digital</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Acesso vitalício às gravações</li>
+                            </ul>
+                        </div>
+                        <div class="p-6 pt-0 flex items-center justify-between border-t border-slate-100 pt-4">
+                            <div>
